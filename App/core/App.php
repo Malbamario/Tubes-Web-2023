@@ -14,8 +14,10 @@ class App{
         $parsed = $this->parseUrl();
 
         if($parsed[0][0]=="") $this->controller = 'home';
+        else if($parsed[0][1]=='index') $this->redirect(BASEURL);
         else if(file_exists('../App/controllers/'.$parsed[0][1].'.php')){
             $this->controller = $parsed[0][1];
+            var_dump($parsed[0][1]);
             unset($parsed[0][0]);
             unset($parsed[0][1]);
         } else $this->redirect($_SERVER['REQUEST_URI'], 404);
